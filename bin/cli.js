@@ -1,56 +1,34 @@
 #!/usr/bin/env node
 
 /**
- * houdunren-vue
+ * Aui
  * 前端脚手架
- * @author 向军大叔 <https://www.houdurnen.com>
+ * @author sunfengfeng <http://aui.sunfengfeng.com>
  */
-import chalk from 'chalk'
-import inquirer from 'inquirer'
-import fs from 'fs'
-import { download } from 'obtain-git-repo'
-import { createSpinner } from 'nanospinner'
-import figlet from 'figlet'
+const chalk = require('chalk')
+const inquirer = require('inquirer')
+const fs = require('fs')
+const figlet = require('figlet')
+const { Command } = require('commander')
+const { name, version } = require('../package.json')
+const Task = require('../command/index')
 
-figlet('Aui', async function (err, data) {
+const program = new Command();
+
+program.name(name).version(version);
+
+figlet('welcome use aui', async function (err, data) {
   //打印文字图案
   console.log(data)
-  //可点击链接
-  console.log(chalk.green(`欢迎使用后盾人前端脚手架，向军大叔每晚8点在抖音与B站直播，请搜索【后盾人】关注`))
 
-  //询问用户
-  const message = await inquirer.prompt({
-    name: 'dirname',
-    type: 'input',
-    message: '请输入目录名',
-    default() {
-      return 'aui'
-    },
-  })
-
-  //目录是否已经存在
-  const dirIsExists = fs.existsSync(message.dirname)
-
-  if (dirIsExists) {
-    console.log(chalk.redBright('目录已经存在'))
-  } else {
-    //显示下载动画
-    const spinner = createSpinner('开始下载...').start()
-    //下载git代码
-    download('direct:https://github.com/fengfeng34qy/aui', message.dirname, function (err) {
-      console.log(err);
-      if (err) {
-        spinner.error({ text: '下载失败' })
-      } else {
-        spinner.success({
-          text: '项目创建成功，请依次执行以下命令',
-        })
-        console.log(chalk.white(`cd ${message.dirname}`))
-        console.log(chalk.white('npm install'))
-        console.log(chalk.white('npm run dev'))
-        console.log(chalk.white('修改.env文件: VITE_MOCK_ENABLE=true'))
-        return
-      }
-    })
-  }
+  program
+  .command("create")
+  .alias('c')
+  .description("create a new project")
+  .option('--first', 'display just the first substring')
+  .action(async (name) => {
+    await Task.createAsync(name);
+  });
+  
+  program.parse();
 })
