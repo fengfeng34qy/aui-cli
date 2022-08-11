@@ -1,4 +1,21 @@
 # 前端脚手架
+
+## 本地使用
+安装依赖
+```bash
+npm install
+```
+
+## 运行
+```bash
+# 本地运行
+node ./bin/cli.js create
+
+# 挂载到全局
+npm link
+aui-cli create
+```
+
 ## 安装
 ```bash
 npm install -g aui-cli
