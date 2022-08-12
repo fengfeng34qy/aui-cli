@@ -17,7 +17,7 @@ const program = new Command();
 
 program.name(name).version(version);
 
-figlet('welcome use aui', async function (err, data) {
+figlet('welcome', async function (err, data) {
   //打印文字图案
   console.log(data)
 
