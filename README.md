@@ -1,20 +1,5 @@
 # 前端脚手架
 
-安装依赖
-```bash
-npm install
-```
-
-## 运行
-```bash
-# 本地运行
-node ./bin/cli.js create
-
-# 挂载到全局
-npm link
-f-cli create
-```
-
 ## 安装
 ```bash
 npm i @sunfengfeng/f-cli -g
@@ -36,4 +21,19 @@ f-cli create
 cd aui
 npm install
 npm run dev
+```
+
+安装依赖
+```bash
+npm install
+```
+
+## 运行
+```bash
+# 本地运行
+node ./bin/cli.js create
+
+# 挂载到全局
+npm link
+f-cli create
 ```
