@@ -94,7 +94,7 @@ async function create(projectName) {
       if (!url) console.log(chalk.redBright('git地址未找到!'));
 
       if (dirIsExists) {
-        console.log(chalk.redBright('目录已经存在'))
+        console.log(chalk.redBright(`目录已经存在: ${result.dirname}`))
       } else {
         //显示下载动画
         const spinner = createSpinner('开始下载...').start()
