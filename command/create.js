@@ -133,8 +133,8 @@ async function create(projectName) {
       console.log(error);
     })
   }).catch (error => {
-    getListSpinner.stop();
     console.log(error);
+    getListSpinner.error({ text: '获取项目列表失败' });
   })
   
 }
