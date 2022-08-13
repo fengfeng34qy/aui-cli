@@ -49,8 +49,6 @@ let projectList = [];
 
 async function create(projectName) {
   const getListSpinner = createSpinner('正在获取项目列表...').start()
-  // await sleepAsync(2000);
-  // getListSpinner.stop()
   rq({
     url: '/rq/f-cli',
     method: 'post',
@@ -59,7 +57,6 @@ async function create(projectName) {
     }
   }).then(function(response) {
     getListSpinner.stop();
-    console.log(response.data.data)
     let list = response.data.data;
     for (let i = 0; i < list.length; i++) {
       var obj = {}
@@ -75,16 +72,15 @@ async function create(projectName) {
           name: 'dirname',
           type: 'list',  // input、number、confirm、list、rawlist、expand、checkbox、password、editor
           message: '请选择项目?', // 问题描述
-          choices: projectList, // 问题选项 type为"list"生效
+          choices: projectList, // 问题选项 type为"list"生效,否则不应该有此属性
           // filter(val) {}, // 回答的过滤器
           // validate(answer) {},  // 回答的校验器
           default() {
-            return 'aui'
+            return projectList[0].value
           }
         }
       ]
     ).then((result) => {
-      console.log(result);
       // 目录是否已经存在
       const dirIsExists = fs.existsSync(result.dirname)
 
